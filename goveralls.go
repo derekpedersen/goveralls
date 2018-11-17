@@ -256,7 +256,7 @@ func process() error {
 	}
 
 	if *repotoken == "" {
-		repotoken = nil // remove the entry from json
+		return fmt.Errorf("missing repotoken")
 	}
 	var pullRequest string
 	if prNumber := os.Getenv("CIRCLE_PR_NUMBER"); prNumber != "" {
@@ -290,8 +290,8 @@ func process() error {
 	// Only include a job ID if it's known, otherwise, Coveralls looks
 	// for the job and can't find it.
 	if jobId != "" {
-		j.ServiceJobId = jobId
-		j.ServiceName = *service
+		// j.ServiceJobId = jobId
+		// j.ServiceName = *service
 	}
 
 	// Ignore files
